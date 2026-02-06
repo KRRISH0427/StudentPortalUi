@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px;
+        }
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 97%;
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #667eea;
+        }
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102,126,234,0.4);
+        }
+
+.flex-container {
+  display: flex; 
+  gap: 10px; 
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.databody {
+	width: 100%;
+	height: 600px;
+	background: white;
+}
+.img-logo {
+	width: 90px;
+	height: 90px;
+}
+
+.row {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+		
+		.table-wrapper {
+  margin: 40px auto;
+  width: 80%;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.table-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#classTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#classTable th,
+#classTable td {
+  padding: 12px;
+  text-align: center;
+}
+
+#classTable thead {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+#classTable tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+#classTable tbody tr:hover {
+  background: #f3f4ff;
+}
+
+#classTable td {
+  color: #333;
+  font-weight: 500;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Student Portal</div>
+        <ul>
+            <li><a href="Dashboard.html">Home</a></li>
+            <li><a href="AddStudentUI.html">Register</a></li>
+            <li><a href="AllStudents.html">Students</a></li>
+            <li><a href="LoginPageFix.html">Logout</a></li>
+        </ul>
+    </div>
+</head>
+
+<body>
+
+
+
+	
+<center>
+<div class="databody">
+<h1 style="color: white;">Dashboard</h1>
+<div class="flex-container">
+
+
+	<div class="card">
+ 
+      
+    <div class="container">
+	<img class="img-logo" src="img/student-logo.png" alt="StudentLogo"/>
+    <h4>Student: <span id="studentCount"></span></h4> 
+ 
+  </div>
+   </div>   
+   <br>
+      
+      <div class ="card">
+       <div class="container">
+	   <img class="img-logo" src="img/teacher.png" alt="TeacherLogo"/>
+	     <h4>Teacher: <span id="teacherCount"></span></h4> 
+	   </div>
+      </div>
+	  
+	  <div class ="card">
+       <div class="container">
+	   <img class="img-logo" src="img/teacher.png" alt="TeacherLogo"/>
+	     <h4>Total: <span id="totalCount"></span></h4> 
+	   </div>
+      </div>
+	  
+	  
+	  <div class ="card">
+       <div class="container">
+	   <img class="img-logo" src="img/class-list.png" alt="Logo"/>
+	     <h4>Class List:<span id="classlist"></span></h4> 
+	   </div>
+      </div>
+</div>
+<br>
+<br>
+<br>
+
+<div>
+
+
+
+</div
+
+
+</center>
+<footer> <center><h5 style="color: white;">2026 | by Krrish</h5></center></footer>
+
+<script>
+
+function loadCount() {
+  const API_URL = "http://localhost:8080/count";
+  fetch(API_URL)
+  .then(response => response.json())
+  .then(data => {
+	//data = API Response
+	//accessing element by id
+	var studentElement = document.getElementById("studentCount");
+	var teacherElement = document.getElementById("teacherCount");
+	var totalElement = document.getElementById("totalCount");
+	//setting api response data into element
+	studentElement.textContent = data.student;
+	teacherElement.textContent = data.teacher;
+	 var totalSum = data.student + data.teacher;
+	 
+	 totalElement.textContent=totalSum;
+  })
+  .catch(error => {
+    console.error(error);
+    alert("Failed to load dashboard data ❌");
+  });   
+}
+
+function classStrength(){
+  const API_URL = "http://localhost:8080/strength";
+  fetch(API_URL)
+  .then(response => response.json())
+  .then(data =>{
+	console.log("Strength Response : ", data);
+  })
+  .catch(err => {
+	console.error(error);
+    alert("Failed to load dashboard data ❌");
+  });
+}
+
+loadCount();
+classStrength();
+</script>
+ </body>
+</html>

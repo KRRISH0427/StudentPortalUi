@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Portal - Login</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* LOGIN CARD */
+        .login-card {
+            background: white;
+            width: 360px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102,126,234,0.4);
+        }
+
+        /* ===== TOGGLE FIXED ===== */
+        .toggle-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f4f4f4;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .role-text {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #ccc;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        input:checked + .slider {
+            background: #667eea;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-card">
+    <h2>Login Page</h2>
+
+    <form id="loginForm">
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="emailUser" required placeholder="Enter email">
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="passwordUser" required placeholder="Enter password">
+        </div>
+
+        <!-- USER TYPE TOGGLE -->
+        <div class="form-group">
+            <label>User Type</label>
+
+            <div class="toggle-box">
+                <span class="role-text" id="studentText">Student</span>
+
+                <label class="switch">
+                    <input type="checkbox" id="userTypeToggle" checked>
+                    <span class="slider"></span>
+                </label>
+
+                <span class="role-text" id="teacherText" style="opacity:0.4;">Teacher</span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+</div>
+
+<script>
+    const toggle = document.getElementById("userTypeToggle");
+    const studentText = document.getElementById("studentText");
+    const teacherText = document.getElementById("teacherText");
+
+    // toggle text effect
+    toggle.addEventListener("change", () => {
+        if (toggle.checked) {
+            studentText.style.opacity = "1";
+            teacherText.style.opacity = "0.4";
+        } else {
+            studentText.style.opacity = "0.4";
+            teacherText.style.opacity = "1";
+        }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const url = "http://localhost:8080/login";
+        const userTypeBool = toggle.checked; // true = student, false = teacher
+
+        const jsonBody = {
+            email: emailUser.value,
+            password: passwordUser.value,
+            userType: userTypeBool
+        };
+
+        console.log("Payload:", jsonBody);
+
+        fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(jsonBody)
+        })
+        .then(res => res.text())
+        .then(data => {
+            if (data === "Invalid username or password") {
+                alert(data);
+            } else {
+                window.location.href = "AllStudents.html";
+            }
+        })
+        .catch(() => alert("Something went wrong ❌"));
+    });
+</script>
+
+</body>
+</html>
