@@ -137,7 +137,7 @@
     <div class="card">
         <h2>Edit Details</h2>
 
-        <form id="registrationForm">
+        <form id="editForm">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" id="studentName" required>
@@ -155,7 +155,7 @@
 
             <div class="form-group">
                 <label>Address</label>
-                <input type="text" id="address" required>
+                <input type="text" id="addressStu" required>
             </div>
 
             <div class="form-group">
@@ -193,20 +193,33 @@
         .then(data => {
 			console.log("response student : ", data);
 			document.getElementById("studentName").value = data.name;
-			document.getElementById("email").value = data.name;
-			document.getElementById("mob").value= data.mob;
+			document.getElementById("email").value = data.email;
+			document.getElementById("mob").value = data.mob;
+			
+			document.getElementById("addressStu").value = data.address;
+			document.getElementById("pcode").value = data.pincode;
+			document.getElementById("gender").value = data.gender;
+			document.getElementById("password").value = data.password;
 		})
-        .catch(() => alert("Something went wrong ❌"));
+        .catch(err => {
+			console.log("Error", err);
+			alert("Something went wrong ❌");
+		});
 	}
 	
+	document.getElementById("editForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // stop page reload
+            updateStudent();
+        });
 	function updateStudent() {
             const url = "http://localhost:8080/update_student";
 
             const jsonBody = {
+				id: studentId,
                 name: studentName.value,
                 email: email.value,
                 mob: mob.value,
-                address: address.value,
+                address: addressStu.value,
                 gender: gender.value,
                 password: password.value,
                 pincode: pcode.value
@@ -218,7 +231,7 @@
                 body: JSON.stringify(jsonBody)
             })
             .then(res => res.text())
-            .then(() => alert("edit Successful 🎉"))
+            .then(() => alert("SUCCESS 🎉"))
             .catch(() => alert("Something went wrong ❌"));
         }
 getStudent();
